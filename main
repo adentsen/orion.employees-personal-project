@@ -1,0 +1,87 @@
+libname orion 'C:\Users\ATSEN\Desktop\SAS Study\Essential\SAS Base Lib\ecprg193';
+
+proc sql; 
+describe table orion.employees, orion.employee_addresses, orion.employee_phones;
+quit;
+
+/*4    proc sql;*/
+/*5    describe table orion.employees, orion.employee_addresses, orion.employee_phones;*/
+/*NOTE: SQL table ORION.EMPLOYEES was created like:*/
+/**/
+/*create table ORION.EMPLOYEES( bufsize=65536 )*/
+/*  (*/
+/*   Employee_ID num,*/
+/*   Hire_Date num format=MMDDYY10.,*/
+/*   Salary num format=COMMA12.2,*/
+/*   Birth_Date num format=MMDDYY10.,*/
+/*   Gender char(1),*/
+/*   Country char(2),*/
+/*   City char(30)*/
+/*  );*/
+/**/
+/*NOTE: Writing HTML Body file: sashtml.htm*/
+/*NOTE: SQL table ORION.EMPLOYEE_ADDRESSES was created like:*/
+/**/
+/*create table ORION.EMPLOYEE_ADDRESSES( bufsize=65536 )*/
+/*  (*/
+/*   Employee_ID num,*/
+/*   Employee_Name char(40),*/
+/*   Street_ID num,*/
+/*   Street_Number num,*/
+/*   Street_Name char(40),*/
+/*   City char(30),*/
+/*   State char(2),*/
+/*   Postal_Code char(10),*/
+/*   Country char(2)*/
+/*  );*/
+/**/
+/*NOTE: SQL table ORION.EMPLOYEE_PHONES was created like:*/
+/**/
+/*create table ORION.EMPLOYEE_PHONES( bufsize=65536 )*/
+/*  (*/
+/*   Employee_ID num,*/
+/*   Phone_Type char(4),*/
+/*   Phone_Number char(200)*/
+/*  );*/
+/**/
+/*6    quit;*/
+
+proc sql;
+select coalesce(a.employee_ID,b.employee_ID,c.employee_ID) as ID , coalesce(upcase(a.country,b.country)) as Country,
+/*   employees.Employee_ID ,*/
+   employees.Hire_Date ,
+   employees.Salary ,
+   employees.Birth_Date, 
+   employees.Gender ,
+/*   employees.Country ,*/
+   employees.City ,
+
+
+/*   EMPLOYEE_ADDRESSES.Employee_ID ,*/
+   EMPLOYEE_ADDRESSES.Employee_Name, 
+   EMPLOYEE_ADDRESSES.Street_ID ,
+   EMPLOYEE_ADDRESSES.Street_Number ,
+   EMPLOYEE_ADDRESSES.Street_Name ,
+   EMPLOYEE_ADDRESSES.City ,
+
+
+
+
+   EMPLOYEE_ADDRESSES.State ,
+   EMPLOYEE_ADDRESSES.Postal_Code ,
+/*   EMPLOYEE_ADDRESSES.Country ,*/
+  
+
+ 
+/*   EMPLOYEE_PHONES.Employee_ID , */
+   EMPLOYEE_PHONES.Phone_Type  ,
+   EMPLOYEE_PHONES.Phone_Number  
+from orion.employees as a, orion.employee_addresses as b, orion.employee_phones as c
+where a.employee_ID=b.employee_ID=c.employee_ID and  c.Phone_type='Work'
+order by ID,country ;
+quit; 
+
+
+
+
+
