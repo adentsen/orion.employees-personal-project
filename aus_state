@@ -1,0 +1,29 @@
+data work.australia_state;
+infile datalines dsd missover dlm=',';
+input aus_state $:32.  aus_abbrev $:3. aus_iso $:6. aus_postal $:3. aus_type $:8. aus_capital $:32. aus_population :32. aus_area :32. ;
+datalines;
+New South Wales,NSW,AU-NSW,NSW,State,Sydney,7704300,800628
+Queensland,Qld,AU-QLD,QLD,State,Brisbane,4827000,1723936
+South Australia,SA,AU-SA,SA,State,Adelaide,1706500,978810
+Tasmania,Tas,AU-TAS,TAS,State,Hobart,518500,64519
+Victoria,Vic,AU-VIC,VIC,State,Melbourne,6039100,227010
+Western Australia,WA,AU-WA,WA,State,Perth,2613700,2526786
+Australian Capital Territory,ACT,AU-ACT,ACT,Territory,Canberra,397397,2280
+Jervis Bay Territory,JBT,,JBT,Territory,(Jervis Bay Village),391,72
+Northern Territory,NT,AU-NT,NT,Territory,Darwin,244000,1335742
+Ashmore and Cartier Islands,,,,External,(Offshore anchorage),0,199
+Australian Antarctic Territory,AAT,AQ,,External,Davis Station,1000,5896500
+Christmas Island,,CX,,External,Flying Fish Cove,2072,135
+Cocos (Keeling) Islands,,CC,,External,West Island/Pulu Panjang,596,14
+Coral Sea Islands,,,,External,(Willis Island),4,10
+Heard Island and McDonald Islands,HIMI,HM,,External,(Atlas Cove),0,372
+Norfolk Island,,NF,,External,Kingston,2302,35
+ 
+;
+run;
+
+proc print data=work.australia_state;
+run;
+
+
+
